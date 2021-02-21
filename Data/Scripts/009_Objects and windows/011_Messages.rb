@@ -1331,7 +1331,7 @@ def pbMessageChooseNumber(message,params,&block)
   return ret
 end
 
-def pbShowCommands(msgwindow,commands=nil,cmdIfCancel=0,defaultCmd=0)
+def pbShowCommands(msgwindow,commands=nil,cmdIfCancel=0,defaultCmd=0,&block)
   return 0 if !commands
   cmdwindow=Window_CommandPokemonEx.new(commands)
   cmdwindow.z=99999
@@ -1345,7 +1345,13 @@ def pbShowCommands(msgwindow,commands=nil,cmdIfCancel=0,defaultCmd=0)
     Input.update
     cmdwindow.update
     msgwindow.update if msgwindow
-    yield if block_given?
+    if block_given?
+      if block.arity==1
+        yield cmdwindow.index
+      else
+        yield
+      end
+    end
     if Input.trigger?(Input::B)
       if cmdIfCancel>0
         command=cmdIfCancel-1
