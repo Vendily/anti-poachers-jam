@@ -29,3 +29,4 @@ https://www.deviantart.com/magiscarf/art/Revamped-Tiles-829482346
 
 Reedited Ranger Sprite (which I made for Daycare originally) into Player sprites.
 Edited Tree to have yellow leaves using colours from Kyledove's other tiles.
+Titlescreen edited from DP intro movie (recoloured mostly)
