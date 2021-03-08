@@ -102,134 +102,25 @@ class PokemonPauseMenu
     @scene.pbStartScene
     endscene = true
     commands = []
-    cmdPokedex  = -1
-    cmdPokemon  = -1
-    cmdBag      = -1
     cmdTrainer  = -1
     cmdSave     = -1
     cmdOption   = -1
-    cmdPokegear = -1
     cmdDebug    = -1
-    cmdQuit     = -1
     cmdEndGame  = -1
-    commands[cmdPokedex = commands.length]  = _INTL("Pokédex") if $Trainer.pokedex && $PokemonGlobal.pokedexViable.length>0
-    commands[cmdPokemon = commands.length]  = _INTL("Pokémon") if $Trainer.party.length>0
-    commands[cmdBag = commands.length]      = _INTL("Bag") if !pbInBugContest?
-    commands[cmdPokegear = commands.length] = _INTL("Pokégear") if $Trainer.pokegear
     commands[cmdTrainer = commands.length]  = $Trainer.name
-    if pbInSafari?
-      if SAFARI_STEPS<=0
-        @scene.pbShowInfo(_INTL("Balls: {1}",pbSafariState.ballcount))
-      else
-        @scene.pbShowInfo(_INTL("Steps: {1}/{2}\nBalls: {3}",
-           pbSafariState.steps,SAFARI_STEPS,pbSafariState.ballcount))
-      end
-      commands[cmdQuit = commands.length]   = _INTL("Quit")
-    elsif pbInBugContest?
-      if pbBugContestState.lastPokemon
-        @scene.pbShowInfo(_INTL("Caught: {1}\nLevel: {2}\nBalls: {3}",
-           PBSpecies.getName(pbBugContestState.lastPokemon.species),
-           pbBugContestState.lastPokemon.level,
-           pbBugContestState.ballcount))
-      else
-        @scene.pbShowInfo(_INTL("Caught: None\nBalls: {1}",pbBugContestState.ballcount))
-      end
-      commands[cmdQuit = commands.length]   = _INTL("Quit Contest")
-    else
-      commands[cmdSave = commands.length]   = _INTL("Save") if $game_system && !$game_system.save_disabled
-    end
+    commands[cmdSave = commands.length]   = _INTL("Save") if $game_system && !$game_system.save_disabled
     commands[cmdOption = commands.length]   = _INTL("Options")
     commands[cmdDebug = commands.length]    = _INTL("Debug") if $DEBUG
     commands[cmdEndGame = commands.length]  = _INTL("Quit Game")
     loop do
       command = @scene.pbShowCommands(commands)
-      if cmdPokedex>=0 && command==cmdPokedex
-        if USE_CURRENT_REGION_DEX
-          pbFadeOutIn {
-            scene = PokemonPokedex_Scene.new
-            screen = PokemonPokedexScreen.new(scene)
-            screen.pbStartScreen
-            @scene.pbRefresh
-          }
-        else
-          if $PokemonGlobal.pokedexViable.length==1
-            $PokemonGlobal.pokedexDex = $PokemonGlobal.pokedexViable[0]
-            $PokemonGlobal.pokedexDex = -1 if $PokemonGlobal.pokedexDex==$PokemonGlobal.pokedexUnlocked.length-1
-            pbFadeOutIn {
-              scene = PokemonPokedex_Scene.new
-              screen = PokemonPokedexScreen.new(scene)
-              screen.pbStartScreen
-              @scene.pbRefresh
-            }
-          else
-            pbFadeOutIn {
-              scene = PokemonPokedexMenu_Scene.new
-              screen = PokemonPokedexMenuScreen.new(scene)
-              screen.pbStartScreen
-              @scene.pbRefresh
-            }
-          end
-        end
-      elsif cmdPokemon>=0 && command==cmdPokemon
-        hiddenmove = nil
-        pbFadeOutIn {
-          sscene = PokemonParty_Scene.new
-          sscreen = PokemonPartyScreen.new(sscene,$Trainer.party)
-          hiddenmove = sscreen.pbPokemonScreen
-          (hiddenmove) ? @scene.pbEndScene : @scene.pbRefresh
-        }
-        if hiddenmove
-          $game_temp.in_menu = false
-          pbUseHiddenMove(hiddenmove[0],hiddenmove[1])
-          return
-        end
-      elsif cmdBag>=0 && command==cmdBag
-        item = 0
-        pbFadeOutIn {
-          scene = PokemonBag_Scene.new
-          screen = PokemonBagScreen.new(scene,$PokemonBag)
-          item = screen.pbStartScreen
-          (item>0) ? @scene.pbEndScene : @scene.pbRefresh
-        }
-        if item>0
-          $game_temp.in_menu = false
-          pbUseKeyItemInField(item)
-          return
-        end
-      elsif cmdPokegear>=0 && command==cmdPokegear
-        pbFadeOutIn {
-          scene = PokemonPokegear_Scene.new
-          screen = PokemonPokegearScreen.new(scene)
-          screen.pbStartScreen
-          @scene.pbRefresh
-        }
-      elsif cmdTrainer>=0 && command==cmdTrainer
+      if cmdTrainer>=0 && command==cmdTrainer
         pbFadeOutIn {
           scene = PokemonTrainerCard_Scene.new
           screen = PokemonTrainerCardScreen.new(scene)
           screen.pbStartScreen
           @scene.pbRefresh
         }
-      elsif cmdQuit>=0 && command==cmdQuit
-        @scene.pbHideMenu
-        if pbInSafari?
-          if pbConfirmMessage(_INTL("Would you like to leave the Safari Game right now?"))
-            @scene.pbEndScene
-            pbSafariState.decision = 1
-            pbSafariState.pbGoToStart
-            return
-          else
-            pbShowMenu
-          end
-        else
-          if pbConfirmMessage(_INTL("Would you like to end the Contest now?"))
-            @scene.pbEndScene
-            pbBugContestState.pbStartJudging
-            return
-          else
-            pbShowMenu
-          end
-        end
       elsif cmdSave>=0 && command==cmdSave
         @scene.pbHideMenu
         scene = PokemonSave_Scene.new
