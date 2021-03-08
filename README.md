@@ -19,23 +19,27 @@ Credits:
 
 Snow Tiles/trees by Kyledove
 https://www.deviantart.com/kyle-dove/art/Biome-Tiles-Public-274422390
-Some tiles are edited together to make varients that aren't on the sheet, or are partially obscured
+Some tiles are edited together to make variants that aren't on the sheet, or are partially obscured
 
-Gmax Lapras by SageDeoxys
+Gmax Lapras Overworld by SageDeoxys
 https://www.deviantart.com/sagedeoxys/art/Gigantamax-Lapras-Overworld-838529666
 
-Snow covered house, cable car building, a by Magiscarf
+Gmax Lapras Battler by leParagon (QC WolfPP)
+https://docs.google.com/spreadsheets/d/1acgzAjh0dnFRQnjZu8kSjS177rKCzpFfEHRLtwuuXRU/edit#gid=0
+
+Snow covered house, cable car building, generator by Magiscarf
 https://www.deviantart.com/magiscarf/art/Revamped-Tiles-829482346
 
 Gold Leaf, Gold Jar, and Black Clothed Gen 4 sprite by Relic Castle staff
+
+Cable car script by PurpleZaffre
+https://reliccastle.com/resources/536/
 
 Reedited Ranger Sprite (which I made for Daycare originally) into Player sprites.
 Edited Tree to have yellow leaves using colours from Kyledove's other tiles.
 Titlescreen edited from DP intro movie (recoloured mostly)
 Intro BG from Pokemon Ranger
 Reformatted the Camerupt, Pachrisu, and Lapras overworlds from HGSS myself, because why not.
+Edited Lapras to make collapse sprite
 
 Ice Tile is a FRLG ice tile recoloured with HGSS ice's colours.
-
-Cable car script by PurpleZaffre
-https://reliccastle.com/resources/536/

@@ -23,6 +23,7 @@ class Game_Character
   attr_reader   :move_speed
   attr_accessor :walk_anime
   attr_writer   :bob_height
+  attr_writer   :chill_slide
 
   def initialize(map=nil)
     @map                       = map

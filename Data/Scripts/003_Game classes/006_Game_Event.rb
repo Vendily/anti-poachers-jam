@@ -1,4 +1,6 @@
 class Game_Event < Game_Character
+  @@chillFrameSpeed = 1.0/15
+
   attr_reader   :map_id
   attr_reader   :trigger
   attr_reader   :list
@@ -243,5 +245,14 @@ class Game_Event < Game_Character
       end
       @interpreter.update
     end
+  end
+  def update_pattern
+    if @event.name[/cold/i]
+      p = ((Graphics.frame_count%60)*@@chillFrameSpeed).floor
+      @chill_slide = (p>=2) ? 2 : 0
+    else
+      @chill_slide = 0
+    end
+    super
   end
 end

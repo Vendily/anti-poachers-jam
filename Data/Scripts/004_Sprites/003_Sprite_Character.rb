@@ -146,6 +146,7 @@ class Sprite_Character < RPG::Sprite
       self.src_rect.set(sx,sy,@cw,@ch)
       self.oy = (@spriteoffset rescue false) ? @ch-16 : @ch
       self.oy -= @character.bob_height
+      self.ox -=@character.chill_slide
     end
     if self.visible
       if $PokemonSystem.tilemap==0 ||

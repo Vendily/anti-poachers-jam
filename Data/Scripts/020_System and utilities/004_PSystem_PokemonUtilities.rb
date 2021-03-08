@@ -56,7 +56,7 @@ def pbNicknameAndStore(pokemon)
   end
   $Trainer.seen[pokemon.species]  = true
   $Trainer.owned[pokemon.species] = true
-  pbNickname(pokemon)
+  #pbNickname(pokemon)
   pbStorePokemon(pokemon)
 end
 
@@ -382,6 +382,14 @@ def pbCheckMove(move)
   return nil
 end
 
+def pbCheckSpecies(species)
+  move = getID(PBSpecies,species)
+  return nil if !species || species<=0
+  for i in $Trainer.pokemonParty
+    return i if i.isSpecies?(species)
+  end
+  return nil
+end
 
 
 #===============================================================================
